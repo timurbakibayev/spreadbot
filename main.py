@@ -51,7 +51,7 @@ def check(file):
                 status[sheet.id] = int(sheet.row_count)
 
             json.dump(status, open(status_filename, "w"))
-        time.sleep(5)
+            time.sleep(5)
 
 # check(gspread.authorize(credentials))
 
