@@ -41,15 +41,16 @@ def check(file):
                     bot.send_message(subscriber, f'You have {min(int(sheet.row_count) - status[str(sheet.id)], int(sheet.row_count)-1)} '
                                                  f'new records in {str(sheet.title)}')
                     recs = sheet.get_all_records()
+                    msg = ""
                     for record in recs[max(len(recs) - (int(sheet.row_count)-status[str(sheet.id)]),0):]:
-                        msg = ""
                         for key in record:
                             if len(str(record[key])) > 0:
                                 msg += f"{key}: {record[key]}\n"
-                        bot.send_message(subscriber, msg)
-                    status[sheet.id] = int(sheet.row_count)
+                        msg += "\n"
+                    bot.send_message(subscriber, msg)
+                status[sheet.id] = int(sheet.row_count)
 
-            json.dump(status, open(status_filename,"w"))
+            json.dump(status, open(status_filename, "w"))
         time.sleep(5)
 
 # check(gspread.authorize(credentials))
